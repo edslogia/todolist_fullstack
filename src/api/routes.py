@@ -16,7 +16,7 @@ CORS(api)
 def handle_home():
 
     response_body = {
-        "message": "All readey to start your day"
+        "message": "All ready to start your day"
     }
 
     return jsonify(response_body), 200
