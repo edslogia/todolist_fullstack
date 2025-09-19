@@ -34,7 +34,7 @@ export const Home = () => {
 	}, [])
 
 	return (
-		<div className="text-center mt-5">
+		<div className="text-center mt-2">
 			<h1 className="display-4">Keep your task organized</h1>
 			<p className="lead">
 				<img src={ImageUrl} className="img-fluid  mb-3 home-img" />
