@@ -1,17 +1,66 @@
-.navbar{  
+.navbar {
   background-color: #7183a300;
 }
 
 .navbar-title {
-  color: white;
+  color: #ffffff;
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 700;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
 }
 
 .navbar-link:hover .navbar-title {
-  color: #777777;
+  color: #cbddcd;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  transform: scale(1.02);
 }
 
 .navbar-link {
   text-decoration: none;
+}
+
+/* Estilos personalizados para los botones del navbar */
+.navbar .btn {
+  font-weight: 600;
+  border-width: 2px;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Botón de Sign Up */
+.navbar .btn-outline-success {
+  border-color: #ffffff;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.navbar .btn-outline-success:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #2d5a3d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de Login */
+.navbar .btn-outline-primary {
+  border-color: #cbddcd;
+  color: #cbddcd;
+  background-color: rgba(203, 221, 205, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.navbar .btn-outline-primary:hover {
+  background-color: #cbddcd;
+  border-color: #cbddcd;
+  color: #425e69;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

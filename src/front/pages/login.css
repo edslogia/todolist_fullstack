@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* El fondo ahora se aplica globalmente desde index.css */
   background: transparent;
 }
 
@@ -19,19 +18,16 @@
 
 .login-card .card-title {
   color: #5a7077;
-  /* Darker shade of the blue-gray */
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .login-card .form-label {
   color: #7997a1;
-  /* Original blue-gray */
 }
 
 .login-card .form-control {
   border-color: #d4dcd6;
-  /* Lighter shade of the green */
   background: #fff;
   color: #5a7077;
 }
@@ -51,6 +47,5 @@
 }
 
 .login-card .btn:hover {
-  background: #818f7c;
-  /* Darker green for hover */
+  background: #46626c;
 }

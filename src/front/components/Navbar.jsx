@@ -7,7 +7,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-light sticky-top">
 			<div className="container">
 				<Link to="/" className="navbar-link">
-					<span className="navbar-brand mb-0 navbar-title">Todo List</span>
+					<span className="navbar-brand mb-0 navbar-title">TaskFlow ✨</span>
 				</Link>
 				<div className="ml-auto d-flex gap-3 align-items-center">
 					<Link to="/signup">
