@@ -22,3 +22,65 @@ def handle_home():
     return jsonify(response_body), 200
 
 
+
+@api.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No data provided"}), 400
+
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip()
+    password = data.get("password", "")
+    confirm_password = data.get("confirmPassword", "")
+
+    errors = {}
+    # Validación de nombre
+    if not name:
+        errors["name"] = "Name is required."
+    elif len(name) > 16:
+        errors["name"] = "Name cannot be more than 16 characters."
+    elif not all(c.isalnum() or c in "_\-áéíóúÁÉÍÓÚñÑ " for c in name):
+        errors["name"] = "Invalid characters in name."
+
+    # Validación de email
+    import re
+    email_regex = r"^[^\s@]+@[^\s@]+\.[^\s@]+$"
+    if not email:
+        errors["email"] = "Email is required."
+    elif not re.match(email_regex, email):
+        errors["email"] = "Invalid email format."
+
+    # Validación de password
+    if not password:
+        errors["password"] = "Password is required."
+    elif len(password) > 10:
+        errors["password"] = "Password cannot be more than 10 characters."
+    elif any(c.isspace() for c in password):
+        errors["password"] = "Password cannot contain spaces."
+
+    # Confirmación de password
+    if password != confirm_password:
+        errors["confirmPassword"] = "Passwords do not match."
+
+    # Verificar si el email o username ya existen
+    if not errors:
+        if User.query.filter_by(email=email).first():
+            errors["email"] = "Email already registered."
+        if User.query.filter_by(username=name).first():
+            errors["name"] = "Name already registered."
+
+    if errors:
+        return jsonify({"errors": errors}), 400
+
+    # Crear usuario
+    user = User(username=name, email=email)
+    user.password = password
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify({"msg": "User registered successfully."}), 201
+
+
+
+
