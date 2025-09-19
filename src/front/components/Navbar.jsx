@@ -4,7 +4,7 @@ import "./navbar.css";
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-light bg-dark sticky-top">
+		<nav className="navbar navbar-light sticky-top">
 			<div className="container">
 				<Link to="/" className="navbar-link">
 					<span className="navbar-brand mb-0 navbar-title">Todo List</span>

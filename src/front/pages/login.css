@@ -5,11 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(
-    135deg,
-    rgb(203, 228, 195) 0%,
-    rgb(66, 94, 105) 100%
-  );
+  /* El fondo ahora se aplica globalmente desde index.css */
+  background: transparent;
 }
 
 .login-card {
