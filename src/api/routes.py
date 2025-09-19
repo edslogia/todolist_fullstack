@@ -20,3 +20,5 @@ def handle_home():
     }
 
     return jsonify(response_body), 200
+
+
