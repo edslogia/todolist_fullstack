@@ -1,0 +1,13 @@
+.navbar-title {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.navbar-link:hover .navbar-title {
+  color: #777777;
+}
+
+.navbar-link {
+  text-decoration: none;
+}
