@@ -1,0 +1,38 @@
+/* Estilos globales para toda la aplicación */
+
+/* Aplicar el fondo degradado a toda la página */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgb(203, 228, 195) 0%,
+    rgb(66, 94, 105) 100%
+  );
+  /* Evitar que se repita el gradiente */
+  background-attachment: fixed;
+}
+
+/* Asegurar que el contenedor principal tenga altura completa */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para el layout principal */
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent; /* Permite que se vea el fondo del body */
+}
+
+/* Asegurar que el contenido principal ocupe el espacio disponible */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
