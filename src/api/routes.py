@@ -12,8 +12,8 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+@api.route('/home', methods=['POST', 'GET'])
+def handle_home():
 
     response_body = {
         "message": "All readey to start your day"
