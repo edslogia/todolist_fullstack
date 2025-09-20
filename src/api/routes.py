@@ -11,7 +11,6 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
-
 @api.route('/home', methods=['POST', 'GET'])
 def handle_home():
 
@@ -20,8 +19,6 @@ def handle_home():
     }
 
     return jsonify(response_body), 200
-
-
 
 @api.route('/register', methods=['POST'])
 def register():
@@ -32,7 +29,6 @@ def register():
     name = data.get("name", "").strip()
     email = data.get("email", "").strip()
     password = data.get("password", "")
-    confirm_password = data.get("confirmPassword", "")
 
     errors = {}
     # Validación de nombre
@@ -59,10 +55,6 @@ def register():
     elif any(c.isspace() for c in password):
         errors["password"] = "Password cannot contain spaces."
 
-    # Confirmación de password
-    if password != confirm_password:
-        errors["confirmPassword"] = "Passwords do not match."
-
     # Verificar si el email o username ya existen
     if not errors:
         if User.query.filter_by(email=email).first():
@@ -80,7 +72,3 @@ def register():
     db.session.commit()
 
     return jsonify({"msg": "User registered successfully."}), 201
-
-
-
-

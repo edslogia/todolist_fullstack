@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { signupUser } from "../services/api.jsx";
 import "./signup.css";
 
 export const Signup = () => {
@@ -10,6 +11,9 @@ export const Signup = () => {
         confirmPassword: ""
     });
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState("");
+    const [apiError, setApiError] = useState("");
 
 
     // Validaciones seguras
@@ -47,8 +51,10 @@ export const Signup = () => {
         setShowPassword((prev) => !prev);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setSuccess("");
+        setApiError("");
         // Validar todos los campos antes de enviar
         const newErrors = {};
         Object.keys(form).forEach((key) => {
@@ -57,8 +63,20 @@ export const Signup = () => {
         });
         setErrors(newErrors);
         if (Object.keys(newErrors).length === 0) {
-            // Aquí iría el submit seguro
-            alert("¡Registro exitoso!");
+            setLoading(true);
+            try {
+                await signupUser({
+                    name: form.name,
+                    email: form.email,
+                    password: form.password
+                });
+                setSuccess("¡Registro exitoso! Ya puedes iniciar sesión.");
+                setForm({ name: "", email: "", password: "", confirmPassword: "" });
+            } catch (err) {
+                setApiError(err.message || "Error al registrar usuario.");
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
@@ -67,6 +85,8 @@ export const Signup = () => {
             <div className="card shadow login-card">
                 <div className="card-body d-flex flex-column align-items-center">
                     <h3 className="card-title mb-4">Create your account</h3>
+                    {success && <div className="alert alert-success w-100 text-center">{success}</div>}
+                    {apiError && <div className="alert alert-danger w-100 text-center">{apiError}</div>}
                     <form style={{ width: "100%" }} onSubmit={handleSubmit} autoComplete="off" spellCheck="false">
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Name</label>
@@ -81,6 +101,7 @@ export const Signup = () => {
                                 maxLength={16}
                                 autoComplete="off"
                                 required
+                                disabled={loading}
                             />
                             {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                         </div>
@@ -96,6 +117,7 @@ export const Signup = () => {
                                 onChange={handleChange}
                                 autoComplete="off"
                                 required
+                                disabled={loading}
                             />
                             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                         </div>
@@ -113,6 +135,7 @@ export const Signup = () => {
                                     maxLength={10}
                                     autoComplete="new-password"
                                     required
+                                    disabled={loading}
                                 />
                                 <button
                                     type="button"
@@ -120,6 +143,7 @@ export const Signup = () => {
                                     tabIndex="-1"
                                     onClick={togglePassword}
                                     style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                                    disabled={loading}
                                 >
                                     <span className="icon-password-toggle">{showPassword ? "🙈" : "👁️"}</span>
                                 </button>
@@ -139,14 +163,16 @@ export const Signup = () => {
                                 maxLength={10}
                                 autoComplete="new-password"
                                 required
+                                disabled={loading}
                             />
                             {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
                         </div>
                         <button
                             type="submit"
                             className="btn w-100 btn-success"
+                            disabled={loading}
                         >
-                            ¡Create my account now!
+                            {loading ? "Creando cuenta..." : "¡Create my account now!"}
                         </button>
                     </form>
                 </div>

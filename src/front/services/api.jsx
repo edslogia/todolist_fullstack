@@ -10,7 +10,8 @@ export async function apiFetch(endpoint, options = {}) {
     try {
         const response = await fetch(BASE_URL + endpoint, options);
         const data = await response.json();
-        if (!response.ok) throw new Error(data.message || 'Error en la petición');
+        console.log(data)
+        if (!response.ok) throw new Error(data.errors || 'Error en la petición');
         return data;
     } catch (error) {
         throw new Error(
@@ -22,3 +23,15 @@ export async function apiFetch(endpoint, options = {}) {
 export async function getHomeMessage() {
     return apiFetch('/home');
 }
+
+// Función para registrar usuario (signup)
+export async function signupUser({ name, email, password }) {
+    return apiFetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+    });
+}
+
