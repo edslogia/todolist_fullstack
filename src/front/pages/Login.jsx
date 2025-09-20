@@ -1,10 +1,14 @@
 
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/api.jsx";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import "./login.css";
 
 export const Login = () => {
+    const navigate = useNavigate();
+    const { store, dispatch } = useGlobalReducer();
     const [showPassword, setShowPassword] = useState(false);
     const [form, setForm] = useState({
         email: "",
@@ -54,7 +58,21 @@ export const Login = () => {
                     password: form.password
                 });
                 setSuccess("¡Login exitoso!");
-                // Aquí puedes guardar el token: res.access_token
+
+                // Guardar el token y usuario en el store global
+                dispatch({
+                    type: 'login',
+                    payload: {
+                        token: res.access_token,
+                        user: res.user || { email: form.email }
+                    }
+                });
+
+                // Redirigir a la página de tareas después del login exitoso
+                setTimeout(() => {
+                    navigate('/task');
+                }, 1500);
+
             } catch (err) {
                 setApiError(err.message || "Error al iniciar sesión.");
             } finally {

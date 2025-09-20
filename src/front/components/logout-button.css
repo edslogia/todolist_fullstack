@@ -1,0 +1,32 @@
+/* Estilos para el botón de logout */
+.navbar-logout-btn {
+  /* Rojo más suave y elegante */
+  border-color: rgba(139, 69, 85, 0.8) !important;
+  color: rgba(139, 69, 85, 0.9) !important;
+  background-color: rgba(139, 69, 85, 0.1) !important;
+  backdrop-filter: blur(10px);
+  font-weight: 600;
+  border-width: 2px;
+  padding: 8px 20px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(139, 69, 85, 0.15);
+}
+
+.navbar-logout-btn:hover {
+  background-color: rgba(139, 69, 85, 0.85) !important;
+  border-color: rgba(139, 69, 85, 0.9) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 69, 85, 0.25);
+}
+
+.navbar-logout-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(139, 69, 85, 0.25) !important;
+}
+
+.navbar-logout-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(139, 69, 85, 0.2);
+}

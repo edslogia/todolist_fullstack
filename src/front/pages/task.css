@@ -1,0 +1,300 @@
+/* Estilos para la página de tareas */
+
+.task-page {
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+/* Header de la página */
+.task-header {
+  margin-bottom: 3rem;
+}
+
+.task-title {
+  color: rgb(66, 94, 105);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(66, 94, 105, 0.1);
+}
+
+.task-subtitle {
+  color: rgba(66, 94, 105, 0.8);
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+/* Contenedor del formulario */
+.task-form-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(66, 94, 105, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Formulario de nueva tarea */
+.task-form .input-group {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(66, 94, 105, 0.15);
+}
+
+.task-input {
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  background: white;
+  color: rgb(66, 94, 105);
+  border-radius: 12px 0 0 12px !important;
+}
+
+.task-input:focus {
+  box-shadow: none;
+  border-color: rgb(203, 228, 195);
+  background: white;
+}
+
+.task-input::placeholder {
+  color: rgba(66, 94, 105, 0.5);
+  font-style: italic;
+}
+
+.task-add-btn {
+  background: linear-gradient(
+    135deg,
+    rgb(66, 94, 105) 0%,
+    rgb(203, 228, 195) 100%
+  );
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  border-radius: 0 12px 12px 0 !important;
+  transition: all 0.3s ease;
+}
+
+.task-add-btn:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    rgb(56, 84, 95) 0%,
+    rgb(193, 218, 185) 100%
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(66, 94, 105, 0.3);
+}
+
+.task-add-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Estadísticas de tareas */
+.task-stats {
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(66, 94, 105, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(203, 228, 195, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(66, 94, 105);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(66, 94, 105, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Contenedor de la lista de tareas */
+.task-list-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(66, 94, 105, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.task-section-title {
+  color: rgb(66, 94, 105);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgb(203, 228, 195);
+  padding-bottom: 0.5rem;
+}
+
+/* Lista de tareas */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Item individual de tarea */
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(66, 94, 105, 0.08);
+}
+
+.task-item:hover {
+  border-color: rgb(203, 228, 195);
+  transform: translateX(5px);
+  box-shadow: 0 4px 16px rgba(66, 94, 105, 0.15);
+}
+
+.task-item.completed {
+  background: rgba(203, 228, 195, 0.1);
+  border-color: rgb(203, 228, 195);
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1rem;
+}
+
+/* Checkbox personalizado */
+.task-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgb(203, 228, 195);
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.task-checkbox:hover {
+  border-color: rgb(66, 94, 105);
+  background: rgba(203, 228, 195, 0.1);
+}
+
+.task-item.completed .task-checkbox {
+  background: rgb(203, 228, 195);
+  border-color: rgb(203, 228, 195);
+}
+
+.task-checkbox i {
+  color: rgb(66, 94, 105);
+  font-size: 12px;
+}
+
+/* Texto de la tarea */
+.task-text {
+  flex: 1;
+  color: rgb(66, 94, 105);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: rgba(66, 94, 105, 0.6);
+}
+
+/* Botón de eliminar */
+.task-delete {
+  background: none;
+  border: none;
+  color: rgba(66, 94, 105, 0.4);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.task-item:hover .task-delete {
+  opacity: 1;
+}
+
+.task-delete:hover {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: rgba(66, 94, 105, 0.6);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: rgb(203, 228, 195);
+}
+
+.empty-state h4 {
+  color: rgb(66, 94, 105);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: rgba(66, 94, 105, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .task-page {
+    padding: 1rem 0;
+  }
+
+  .task-title {
+    font-size: 2rem;
+  }
+
+  .task-form-container,
+  .task-list-container {
+    padding: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .task-item {
+    padding: 1rem;
+  }
+
+  .task-add-btn {
+    padding: 1rem 1.5rem;
+  }
+
+  .stat-card {
+    margin-bottom: 1rem;
+  }
+}
