@@ -1,6 +1,7 @@
 
 
 import React, { useState } from "react";
+import { loginUser } from "../services/api.jsx";
 import "./login.css";
 
 export const Login = () => {
@@ -10,6 +11,9 @@ export const Login = () => {
         password: ""
     });
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [apiError, setApiError] = useState("");
+    const [success, setSuccess] = useState("");
 
     // Validaciones seguras
     const validate = (field, value) => {
@@ -31,8 +35,10 @@ export const Login = () => {
         setErrors({ ...errors, [name]: validate(name, value) });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setApiError("");
+        setSuccess("");
         // Validar todos los campos antes de enviar
         const newErrors = {};
         Object.keys(form).forEach((key) => {
@@ -41,8 +47,19 @@ export const Login = () => {
         });
         setErrors(newErrors);
         if (Object.keys(newErrors).length === 0) {
-            // Aquí iría el submit seguro
-            alert("Login successful!");
+            setLoading(true);
+            try {
+                const res = await loginUser({
+                    email: form.email,
+                    password: form.password
+                });
+                setSuccess("¡Login exitoso!");
+                // Aquí puedes guardar el token: res.access_token
+            } catch (err) {
+                setApiError(err.message || "Error al iniciar sesión.");
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
@@ -55,6 +72,8 @@ export const Login = () => {
             <div className="card shadow login-card">
                 <div className="card-body d-flex flex-column align-items-center">
                     <h3 className="card-title mb-4">Login</h3>
+                    {success && <div className="alert alert-success w-100 text-center">{success}</div>}
+                    {apiError && <div className="alert alert-danger w-100 text-center">{apiError}</div>}
                     <form style={{ width: "100%" }} onSubmit={handleSubmit} autoComplete="off" spellCheck="false">
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email</label>
@@ -68,6 +87,7 @@ export const Login = () => {
                                 onChange={handleChange}
                                 autoComplete="off"
                                 required
+                                disabled={loading}
                             />
                             {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                         </div>
@@ -85,6 +105,7 @@ export const Login = () => {
                                     maxLength={10}
                                     autoComplete="current-password"
                                     required
+                                    disabled={loading}
                                 />
                                 <button
                                     type="button"
@@ -92,6 +113,7 @@ export const Login = () => {
                                     tabIndex="-1"
                                     onClick={togglePassword}
                                     style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+                                    disabled={loading}
                                 >
                                     <span className="icon-password-toggle">{showPassword ? "🙈" : "👁️"}</span>
                                 </button>
@@ -100,9 +122,10 @@ export const Login = () => {
                         </div>
                         <button
                             type="submit"
-                            className="btn w-100"
+                            className="btn w-100 btn-primary"
+                            disabled={loading}
                         >
-                            Confirm identity
+                            {loading ? "Verificando..." : "Confirm identity"}
                         </button>
                     </form>
                 </div>

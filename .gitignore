@@ -80,3 +80,12 @@ database.database
 database.db
 diagram.png
 __pycache__/
+
+# Archivos de base de datos locales
+*.db
+*.sqlite3
+
+# Archivos temporales y caché
+__pycache__/
+*.pyc
+*.pyo

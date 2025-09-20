@@ -1,5 +1,12 @@
 # Plantilla de WebApp con React JS y Flask API
 
+.\\.venv\\Scripts\\Activate.ps1
+
+alembic upgrade head
+
+python -m alembic revision --autogenerate -m "mensaje"   
+python -m alembic upgrade head
+
 Construye aplicaciones web usando React.js para el front end y python/flask para tu API backend.
 
 - La documentación se puede encontrar aquí: https://4geeks.com/docs/start/react-flask-template
