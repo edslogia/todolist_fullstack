@@ -1,7 +1,12 @@
 import logging
 from logging.config import fileConfig
 
+
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 from flask import current_app
+from app import app
 
 from alembic import context
 
@@ -36,8 +41,14 @@ def get_engine_url():
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-config.set_main_option('sqlalchemy.url', get_engine_url())
-target_db = current_app.extensions['migrate'].db
+
+def run_with_app_context(fn):
+    with app.app_context():
+        # Mover la obtención de target_db y la configuración de sqlalchemy.url aquí
+        global target_db
+        target_db = current_app.extensions['migrate'].db
+        config.set_main_option('sqlalchemy.url', get_engine_url())
+        fn()
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -108,6 +119,6 @@ def run_migrations_online():
 
 
 if context.is_offline_mode():
-    run_migrations_offline()
+    run_with_app_context(run_migrations_offline)
 else:
-    run_migrations_online()
+    run_with_app_context(run_migrations_online)
