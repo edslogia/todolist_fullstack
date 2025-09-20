@@ -35,3 +35,13 @@ export async function signupUser({ name, email, password }) {
     });
 }
 
+// Función para login de usuario
+export async function loginUser({ email, password }) {
+    return apiFetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    });
+}

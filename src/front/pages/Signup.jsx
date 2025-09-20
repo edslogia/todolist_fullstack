@@ -70,7 +70,7 @@ export const Signup = () => {
                     email: form.email,
                     password: form.password
                 });
-                setSuccess("¡Registro exitoso! Ya puedes iniciar sesión.");
+                setSuccess("Registration successful! You can now log in.");
                 setForm({ name: "", email: "", password: "", confirmPassword: "" });
             } catch (err) {
                 setApiError(err.message || "Error al registrar usuario.");

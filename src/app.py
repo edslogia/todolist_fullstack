@@ -2,14 +2,16 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask import Flask, request, jsonify, url_for, send_from_directory, current_app
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
 from api.models import db
+
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_jwt_extended import JWTManager, create_access_token
 
 # from models import Person
 
@@ -17,6 +19,25 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../dist/')
 app = Flask(__name__)
+app.url_map.strict_slashes = False
+
+# database condiguration
+db_url = os.getenv("DATABASE_URL")
+if db_url is not None:
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
+        "postgres://", "postgresql://")
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///test.db"
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+# JWT setup dentro del contexto de la app
+with app.app_context():
+    if not hasattr(current_app, 'jwt_manager'):
+        secret = os.environ.get('JWT_SECRET_KEY', 'super-secret-jwt')
+        current_app.config['JWT_SECRET_KEY'] = secret
+        jwt = JWTManager(current_app)
 app.url_map.strict_slashes = False
 
 # database condiguration
