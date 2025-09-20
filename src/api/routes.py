@@ -58,9 +58,9 @@ def register():
     # Verificar si el email o username ya existen
     if not errors:
         if User.query.filter_by(email=email).first():
-            errors["email"] = "Email already registered."
+            errors = "Email already registered."
         if User.query.filter_by(username=name).first():
-            errors["name"] = "Name already registered."
+            errors = "Name already registered."
 
     if errors:
         return jsonify({"errors": errors}), 400
